@@ -2,7 +2,7 @@ import jwt from 'jsonwebtoken';
 import { NextRequest } from 'next/server';
 import { supabaseAdmin } from './db';
 
-const JWT_SECRET = process.env.JWT_SECRET!;
+const JWT_SECRET = process.env.JWT_SECRET || 'trustvault-dev-fallback-secret-key-32chars';
 
 export interface JWTPayload {
   userId: string;
