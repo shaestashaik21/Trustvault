@@ -1,8 +1,13 @@
 .container {
   display: flex;
   min-height: 100vh;
-  background: transparent;
+  background-color: #0c1427;
+  background-image: url('/custom-bg.png');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
   font-family: 'Inter', sans-serif;
+  position: relative;
 }
 
 /* LEFT PANEL (Crystal clear so gold leaves shine through) */
