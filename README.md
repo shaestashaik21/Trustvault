@@ -2,8 +2,8 @@
 
 Secure document management system with server-enforced role-based access control, granular permissions, and an immutable audit trail.
 
-**Live demo:** _(add your Vercel URL here)_
-**GitHub repo:** _(add your repo URL here)_
+🌐 **Live Demo:** [https://trustvault-wheat.vercel.app](https://trustvault-wheat.vercel.app)  
+📦 **GitHub Repo:** [https://github.com/shaestashaik21/Trustvault](https://github.com/shaestashaik21/Trustvault)
 
 ---
 
