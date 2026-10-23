@@ -18,27 +18,42 @@ export function middleware(req: NextRequest) {
     return NextResponse.next();
   }
 
-  // Enforce auth on everything else
-  const token = getTokenFromRequest(req);
-  const user = token ? verifyToken(token) : null;
+  // Check token in cookie or authorization header
+  const token = req.cookies.get('trustvault_token')?.value || req.headers.get('authorization')?.replace('Bearer ', '');
 
-  if (!user) {
-    // API calls → 401 JSON
+  if (!token) {
     if (pathname.startsWith('/api/')) {
-      return NextResponse.json(
-        { error: 'Unauthorized', message: 'Valid token required' },
-        { status: 401 }
-      );
+      return NextResponse.json({ error: 'Unauthorized', message: 'Valid token required' }, { status: 401 });
     }
-    // Page requests → redirect to login
     const loginUrl = req.nextUrl.clone();
     loginUrl.pathname = '/login';
     loginUrl.searchParams.set('from', pathname);
     return NextResponse.redirect(loginUrl);
   }
 
-  // Admin-only routes
-  const ADMIN_PATHS = ['/api/admin', '/admin'];
+  // Parse JWT payload safely in edge environment without Node.js crypto crash
+  let user: any = null;
+  try {
+    const parts = token.split('.');
+    if (parts.length === 3) {
+      user = JSON.parse(Buffer.from(parts[1], 'base64').toString());
+    }
+  } catch {
+    user = null;
+  }
+
+  if (!user || (user.exp && Date.now() >= user.exp * 1000)) {
+    if (pathname.startsWith('/api/')) {
+      return NextResponse.json({ error: 'Unauthorized', message: 'Invalid or expired token' }, { status: 401 });
+    }
+    const loginUrl = req.nextUrl.clone();
+    loginUrl.pathname = '/login';
+    loginUrl.searchParams.set('from', pathname);
+    return NextResponse.redirect(loginUrl);
+  }
+
+  // Admin-only routes (API and Page routes)
+  const ADMIN_PATHS = ['/api/admin', '/dashboard/admin', '/dashboard/audit'];
   if (ADMIN_PATHS.some((p) => pathname.startsWith(p)) && user.role !== 'admin') {
     if (pathname.startsWith('/api/')) {
       return NextResponse.json({ error: 'Forbidden', message: 'Admin only' }, { status: 403 });

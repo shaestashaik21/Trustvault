@@ -41,9 +41,49 @@ export default function DashboardLayout({ children }: { children: React.ReactNod
 
   if (!user) return null;
 
-  const allNav = user.role === 'admin'
-    ? [...navItems, { href: '/dashboard/admin', label: 'Admin Panel', icon: '⚙️' }]
-    : navItems;
+  // Strict Role-Based Navigation:
+  // John Doe (Administrator)   -> Home, Admin Panel, Audit Logs, Documents
+  // Sarah Wilson (Doc Owner)   -> Home, Documents, Permissions, Shared with me
+  // Mike Chen (Editor)         -> Home, Shared with me
+  // Alex Brown (Viewer)        -> Home, Shared with me
+  // Emily Davis (Viewer)       -> Home, Shared with me
+
+  const getFilteredNav = () => {
+    const title = user.title ?? (user.role === 'admin' ? 'Administrator' : 'Viewer');
+
+    if (title === 'Administrator' || user.role === 'admin') {
+      return [
+        { href: '/dashboard', label: 'Home', icon: '⊞' },
+        { href: '/dashboard/admin', label: 'Admin Panel', icon: '⚙️' },
+        { href: '/dashboard/audit', label: 'Security Logs', icon: '🕐' },
+        { href: '/dashboard/documents', label: 'All Documents', icon: '📄' },
+      ];
+    }
+
+    if (title === 'Document Owner') {
+      return [
+        { href: '/dashboard', label: 'Home', icon: '⊞' },
+        { href: '/dashboard/documents', label: 'My Documents', icon: '📄' },
+        { href: '/dashboard/permissions', label: 'Permissions Matrix', icon: '🔑' },
+        { href: '/dashboard/shared', label: 'Shared with me', icon: '👥' },
+      ];
+    }
+
+    if (title === 'Editor') {
+      return [
+        { href: '/dashboard', label: 'Home', icon: '⊞' },
+        { href: '/dashboard/shared', label: 'Shared with me (Edit)', icon: '👥' },
+      ];
+    }
+
+    // Default Viewer (Alex Brown, Emily Davis)
+    return [
+      { href: '/dashboard', label: 'Home', icon: '⊞' },
+      { href: '/dashboard/shared', label: 'Shared Documents (Read)', icon: '👥' },
+    ];
+  };
+
+  const allNav = getFilteredNav();
 
   return (
     <div className={styles.shell}>
