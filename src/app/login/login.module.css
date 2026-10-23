@@ -208,10 +208,58 @@
   margin-top: 1.5rem;
 }
 
+.hintContainer {
+  margin-top: 1.5rem;
+}
+
+.hintBtn {
+  width: 100%;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px dashed rgba(0, 212, 170, 0.4);
+  color: #00d4aa;
+  border-radius: 8px;
+  padding: 0.65rem 1rem;
+  font-size: 0.85rem;
+  font-weight: 600;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  transition: all 0.2s;
+  font-family: inherit;
+}
+
+.hintBtn:hover {
+  background: rgba(0, 212, 170, 0.1);
+  border-color: #00d4aa;
+}
+
+.hintArrow {
+  font-size: 0.75rem;
+  color: rgba(255, 255, 255, 0.4);
+}
+
+.demoCreds {
+  font-size: 0.68rem;
+  color: #00d4aa;
+  font-family: monospace;
+  margin-top: 3px;
+  background: rgba(0, 212, 170, 0.08);
+  display: inline-block;
+  padding: 1px 4px;
+  border-radius: 3px;
+}
+
 .demoSwitcher {
-  margin-top: 1.75rem;
-  padding-top: 1.25rem;
+  margin-top: 0.85rem;
+  padding-top: 0.85rem;
   border-top: 1px solid rgba(255,255,255,0.08);
+  animation: fadeIn 0.2s ease-in-out;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(-4px); }
+  to { opacity: 1; transform: translateY(0); }
 }
 
 .demoTitle {

@@ -10,6 +10,7 @@ export default function LoginPage() {
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
   const [loading, setLoading] = useState(false);
+  const [showHint, setShowHint] = useState(false);
 
   async function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
@@ -126,67 +127,86 @@ export default function LoginPage() {
             Don&apos;t have an account? Contact your administrator.
           </p>
 
-          <div className={styles.demoSwitcher}>
-            <div className={styles.demoTitle}>
-              <span>⚡ Team Members Role Matrix (1-Click Fill)</span>
-            </div>
-            <div className={styles.demoGrid}>
-              <button
-                type="button"
-                className={styles.demoCard}
-                onClick={() => { setEmail('john.doe@trustvault.local'); setPassword('Admin@123456'); }}
-              >
-                <div className={styles.demoRole}>
-                  👑 John Doe <span className={`${styles.demoBadge} ${styles.badgeAdmin}`}>Administrator</span>
-                </div>
-                <div className={styles.demoEmail}>Manage users, security logs, system settings</div>
-              </button>
+          <div className={styles.hintContainer}>
+            <button
+              type="button"
+              id="hint-toggle-btn"
+              className={styles.hintBtn}
+              onClick={() => setShowHint(prev => !prev)}
+            >
+              <span>💡 {showHint ? 'Hide Login Hint' : 'Show Login Hint (Test Accounts)'}</span>
+              <span className={styles.hintArrow}>{showHint ? '▲' : '▼'}</span>
+            </button>
 
-              <button
-                type="button"
-                className={styles.demoCard}
-                onClick={() => { setEmail('sarah.wilson@trustvault.local'); setPassword('Sarah@123456'); }}
-              >
-                <div className={styles.demoRole}>
-                  📁 Sarah Wilson <span className={`${styles.demoBadge} ${styles.badgeUser}`}>Doc Owner</span>
+            {showHint && (
+              <div className={styles.demoSwitcher}>
+                <div className={styles.demoTitle}>
+                  <span>⚡ Team Members Role Matrix (Click to Auto-fill)</span>
                 </div>
-                <div className={styles.demoEmail}>Upload, edit own docs, grant/revoke access</div>
-              </button>
+                <div className={styles.demoGrid}>
+                  <button
+                    type="button"
+                    className={styles.demoCard}
+                    onClick={() => { setEmail('john.doe@trustvault.local'); setPassword('Admin@123456'); }}
+                  >
+                    <div className={styles.demoRole}>
+                      👑 John Doe <span className={`${styles.demoBadge} ${styles.badgeAdmin}`}>Administrator</span>
+                    </div>
+                    <div className={styles.demoEmail}>Manage users, security logs, system settings</div>
+                    <div className={styles.demoCreds}>Pass: Admin@123456</div>
+                  </button>
 
-              <button
-                type="button"
-                className={styles.demoCard}
-                onClick={() => { setEmail('mike.chen@trustvault.local'); setPassword('Mike@123456'); }}
-              >
-                <div className={styles.demoRole}>
-                  ✏️ Mike Chen <span className={`${styles.demoBadge} ${styles.badgeUser}`}>Editor</span>
-                </div>
-                <div className={styles.demoEmail}>Read and edit docs shared with him</div>
-              </button>
+                  <button
+                    type="button"
+                    className={styles.demoCard}
+                    onClick={() => { setEmail('sarah.wilson@trustvault.local'); setPassword('Sarah@123456'); }}
+                  >
+                    <div className={styles.demoRole}>
+                      📁 Sarah Wilson <span className={`${styles.demoBadge} ${styles.badgeUser}`}>Doc Owner</span>
+                    </div>
+                    <div className={styles.demoEmail}>Upload, edit own docs, grant/revoke access</div>
+                    <div className={styles.demoCreds}>Pass: Sarah@123456</div>
+                  </button>
 
-              <button
-                type="button"
-                className={styles.demoCard}
-                onClick={() => { setEmail('alex.brown@trustvault.local'); setPassword('Alex@123456'); }}
-              >
-                <div className={styles.demoRole}>
-                  👀 Alex Brown <span className={`${styles.demoBadge} ${styles.badgeUser}`}>Viewer</span>
-                </div>
-                <div className={styles.demoEmail}>Read and download docs shared with him</div>
-              </button>
+                  <button
+                    type="button"
+                    className={styles.demoCard}
+                    onClick={() => { setEmail('mike.chen@trustvault.local'); setPassword('Mike@123456'); }}
+                  >
+                    <div className={styles.demoRole}>
+                      ✏️ Mike Chen <span className={`${styles.demoBadge} ${styles.badgeUser}`}>Editor</span>
+                    </div>
+                    <div className={styles.demoEmail}>Read and edit docs shared with him</div>
+                    <div className={styles.demoCreds}>Pass: Mike@123456</div>
+                  </button>
 
-              <button
-                type="button"
-                className={styles.demoCard}
-                style={{ gridColumn: 'span 2' }}
-                onClick={() => { setEmail('emily.davis@trustvault.local'); setPassword('Emily@123456'); }}
-              >
-                <div className={styles.demoRole}>
-                  📖 Emily Davis <span className={`${styles.demoBadge} ${styles.badgeUser}`}>Viewer</span>
+                  <button
+                    type="button"
+                    className={styles.demoCard}
+                    onClick={() => { setEmail('alex.brown@trustvault.local'); setPassword('Alex@123456'); }}
+                  >
+                    <div className={styles.demoRole}>
+                      👀 Alex Brown <span className={`${styles.demoBadge} ${styles.badgeUser}`}>Viewer</span>
+                    </div>
+                    <div className={styles.demoEmail}>Read and download docs shared with him</div>
+                    <div className={styles.demoCreds}>Pass: Alex@123456</div>
+                  </button>
+
+                  <button
+                    type="button"
+                    className={styles.demoCard}
+                    style={{ gridColumn: 'span 2' }}
+                    onClick={() => { setEmail('emily.davis@trustvault.local'); setPassword('Emily@123456'); }}
+                  >
+                    <div className={styles.demoRole}>
+                      📖 Emily Davis <span className={`${styles.demoBadge} ${styles.badgeUser}`}>Viewer</span>
+                    </div>
+                    <div className={styles.demoEmail}>Read docs shared with her (restricted permissions)</div>
+                    <div className={styles.demoCreds}>Pass: Emily@123456</div>
+                  </button>
                 </div>
-                <div className={styles.demoEmail}>Read docs shared with her (restricted permissions)</div>
-              </button>
-            </div>
+              </div>
+            )}
           </div>
         </div>
       </div>
