@@ -1,14 +1,17 @@
 .container {
   display: flex;
   min-height: 100vh;
-  background: #0a0f1e;
+  background: transparent;
   font-family: 'Inter', sans-serif;
 }
 
 /* LEFT PANEL */
 .leftPanel {
   flex: 1;
-  background: linear-gradient(135deg, #0a0f1e 0%, #0d1b3e 50%, #0a1628 100%);
+  background: rgba(10, 15, 30, 0.55);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border-right: 1px solid rgba(255, 255, 255, 0.08);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -90,16 +93,24 @@
 /* RIGHT PANEL */
 .rightPanel {
   flex: 0 0 480px;
-  background: #111827;
+  background: rgba(13, 20, 36, 0.7);
+  backdrop-filter: blur(24px);
+  -webkit-backdrop-filter: blur(24px);
   display: flex;
   align-items: center;
   justify-content: center;
   padding: 3rem 2.5rem;
+  box-shadow: -10px 0 30px rgba(0, 0, 0, 0.3);
 }
 
 .formCard {
   width: 100%;
   max-width: 380px;
+  background: rgba(17, 24, 39, 0.65);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 16px;
+  padding: 2.25rem;
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
 }
 
 .formHeader {
