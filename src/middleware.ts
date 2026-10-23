@@ -8,13 +8,18 @@ const PUBLIC_PATHS = [
   '/api/auth/logout',
   '/_next',
   '/favicon.ico',
+  '/custom-bg.png',
+  '/cosmic-bg.png',
 ];
 
 export function middleware(req: NextRequest) {
   const { pathname } = req.nextUrl;
 
-  // Allow public paths
-  if (PUBLIC_PATHS.some((p) => pathname.startsWith(p))) {
+  // Allow static files (.png, .jpg, .svg, .ico, etc) and public paths
+  if (
+    PUBLIC_PATHS.some((p) => pathname.startsWith(p)) ||
+    pathname.match(/\.(png|jpg|jpeg|gif|svg|webp|ico)$/)
+  ) {
     return NextResponse.next();
   }
 
