@@ -5,31 +5,16 @@
   font-family: 'Inter', sans-serif;
 }
 
-/* LEFT PANEL (Dark brand side with subtle glassmorphic transparency) */
+/* LEFT PANEL (Crystal clear so gold leaves shine through) */
 .leftPanel {
   flex: 1;
-  background: rgba(7, 13, 30, 0.45);
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
-  border-right: 1px solid rgba(255, 255, 255, 0.1);
+  background: transparent;
   display: flex;
   align-items: center;
   justify-content: center;
   padding: 3.5rem;
   position: relative;
   overflow: hidden;
-}
-
-.leftPanel::before {
-  content: '';
-  position: absolute;
-  width: 500px;
-  height: 500px;
-  background: radial-gradient(circle, rgba(0, 212, 170, 0.12) 0%, transparent 70%);
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  pointer-events: none;
 }
 
 .brandContent {
@@ -93,14 +78,11 @@
 /* RIGHT PANEL */
 .rightPanel {
   flex: 0 0 520px;
-  background: rgba(11, 19, 37, 0.65);
-  backdrop-filter: blur(20px);
-  -webkit-backdrop-filter: blur(20px);
+  background: transparent;
   display: flex;
   align-items: center;
   justify-content: center;
   padding: 3rem 3rem;
-  box-shadow: -10px 0 40px rgba(0, 0, 0, 0.4);
 }
 
 .formCard {
