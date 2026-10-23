@@ -29,10 +29,11 @@ export default function LoginPage() {
         return;
       }
 
-      // Store token in localStorage for client-side use (cookie also set by server)
+      // Store token in localStorage and cookie for client-side and server-side navigation
       localStorage.setItem('tv_token', data.token);
       localStorage.setItem('tv_user', JSON.stringify(data.user));
-      router.push('/dashboard');
+      document.cookie = `trustvault_token=${data.token}; path=/; max-age=28800; SameSite=Lax`;
+      window.location.href = '/dashboard';
     } catch {
       setError('Network error — please try again');
     } finally {
@@ -124,6 +125,69 @@ export default function LoginPage() {
           <p className={styles.footNote}>
             Don&apos;t have an account? Contact your administrator.
           </p>
+
+          <div className={styles.demoSwitcher}>
+            <div className={styles.demoTitle}>
+              <span>⚡ Fast Demo Role Profiles</span>
+            </div>
+            <div className={styles.demoGrid}>
+              <button
+                type="button"
+                className={styles.demoCard}
+                onClick={() => { setEmail('admin@trustvault.local'); setPassword('Admin@123456'); }}
+              >
+                <div className={styles.demoRole}>
+                  👑 Admin <span className={`${styles.demoBadge} ${styles.badgeAdmin}`}>Admin</span>
+                </div>
+                <div className={styles.demoEmail}>All access + Users</div>
+              </button>
+
+              <button
+                type="button"
+                className={styles.demoCard}
+                onClick={() => { setEmail('manager@trustvault.local'); setPassword('Manager@123456'); }}
+              >
+                <div className={styles.demoRole}>
+                  💼 Manager <span className={`${styles.demoBadge} ${styles.badgeAdmin}`}>Admin</span>
+                </div>
+                <div className={styles.demoEmail}>Manage team & files</div>
+              </button>
+
+              <button
+                type="button"
+                className={styles.demoCard}
+                onClick={() => { setEmail('auditor@trustvault.local'); setPassword('Auditor@123456'); }}
+              >
+                <div className={styles.demoRole}>
+                  🔍 Auditor <span className={`${styles.demoBadge} ${styles.badgeUser}`}>User</span>
+                </div>
+                <div className={styles.demoEmail}>Audit logs focus</div>
+              </button>
+
+              <button
+                type="button"
+                className={styles.demoCard}
+                onClick={() => { setEmail('editor@trustvault.local'); setPassword('Editor@123456'); }}
+              >
+                <div className={styles.demoRole}>
+                  ✏️ Editor <span className={`${styles.demoBadge} ${styles.badgeUser}`}>User</span>
+                </div>
+                <div className={styles.demoEmail}>Create & edit docs</div>
+              </button>
+
+              <button
+                type="button"
+                className={styles.demoCard}
+                style={{ gridColumn: 'span 2' }}
+                onClick={() => { setEmail('viewer@trustvault.local'); setPassword('Viewer@123456'); }}
+              >
+                <div className={styles.demoRole}>
+                  👀 Viewer <span className={`${styles.demoBadge} ${styles.badgeUser}`}>User</span>
+                </div>
+                <div className={styles.demoEmail}>Read-only access (No admin panel, restricted delete)</div>
+              </button>
+            </div>
+          </div>
         </div>
       </div>
     </div>

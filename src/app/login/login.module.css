@@ -208,6 +208,73 @@
   margin-top: 1.5rem;
 }
 
+.demoSwitcher {
+  margin-top: 1.75rem;
+  padding-top: 1.25rem;
+  border-top: 1px solid rgba(255,255,255,0.08);
+}
+
+.demoTitle {
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.4);
+  letter-spacing: 0.06em;
+  margin-bottom: 0.75rem;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+}
+
+.demoGrid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.5rem;
+}
+
+.demoCard {
+  background: rgba(255,255,255,0.04);
+  border: 1px solid rgba(255,255,255,0.08);
+  border-radius: 8px;
+  padding: 0.55rem 0.7rem;
+  cursor: pointer;
+  text-align: left;
+  transition: all 0.2s;
+  font-family: inherit;
+}
+
+.demoCard:hover {
+  background: rgba(0, 212, 170, 0.08);
+  border-color: rgba(0, 212, 170, 0.3);
+  transform: translateY(-1px);
+}
+
+.demoRole {
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: #fff;
+  display: flex;
+  align-items: center;
+  gap: 0.3rem;
+}
+
+.demoBadge {
+  font-size: 0.65rem;
+  padding: 1px 4px;
+  border-radius: 4px;
+  font-weight: 700;
+  text-transform: uppercase;
+}
+
+.badgeAdmin { background: rgba(239, 68, 68, 0.2); color: #f87171; }
+.badgeUser { background: rgba(0, 212, 170, 0.2); color: #00d4aa; }
+
+.demoEmail {
+  font-size: 0.7rem;
+  color: rgba(255,255,255,0.4);
+  margin-top: 2px;
+}
+
 @media (max-width: 768px) {
   .container { flex-direction: column; }
   .leftPanel { flex: 0; padding: 2rem; }

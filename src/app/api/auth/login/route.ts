@@ -30,17 +30,52 @@ export async function POST(req: NextRequest) {
       console.warn('[LOGIN DB UNAVAILABLE, USING LOCAL FALLBACK]');
     }
 
-    // Default admin fallback for local testing & demo
-    const DEFAULT_ADMIN_EMAIL = 'admin@trustvault.local';
-    const DEFAULT_ADMIN_PASS = 'Admin@123456';
-    const DEFAULT_ADMIN_HASH = '$2a$12$N.9quT22aN7W2WqXJ.Uj5uv7O0xW1qJ9E8G2hG0qZ2n7X5eL9N7vC'; // Admin@123456
-
-    if (!user && email === DEFAULT_ADMIN_EMAIL) {
-      user = {
+    // Pre-configured role accounts for demo & testing
+    const DEMO_USERS: Record<string, { id: string; email: string; pass: string; role: 'admin' | 'user'; title: string }> = {
+      'admin@trustvault.local': {
         id: '00000000-0000-0000-0000-000000000001',
-        email: DEFAULT_ADMIN_EMAIL,
-        password_hash: DEFAULT_ADMIN_HASH,
+        email: 'admin@trustvault.local',
+        pass: 'Admin@123456',
         role: 'admin',
+        title: 'System Administrator',
+      },
+      'manager@trustvault.local': {
+        id: '00000000-0000-0000-0000-000000000002',
+        email: 'manager@trustvault.local',
+        pass: 'Manager@123456',
+        role: 'admin',
+        title: 'Operations Manager',
+      },
+      'auditor@trustvault.local': {
+        id: '00000000-0000-0000-0000-000000000003',
+        email: 'auditor@trustvault.local',
+        pass: 'Auditor@123456',
+        role: 'user',
+        title: 'Compliance Auditor',
+      },
+      'editor@trustvault.local': {
+        id: '00000000-0000-0000-0000-000000000004',
+        email: 'editor@trustvault.local',
+        pass: 'Editor@123456',
+        role: 'user',
+        title: 'Senior Editor',
+      },
+      'viewer@trustvault.local': {
+        id: '00000000-0000-0000-0000-000000000005',
+        email: 'viewer@trustvault.local',
+        pass: 'Viewer@123456',
+        role: 'user',
+        title: 'Guest Viewer',
+      },
+    };
+
+    const demoAccount = DEMO_USERS[email];
+    if (!user && demoAccount) {
+      user = {
+        id: demoAccount.id,
+        email: demoAccount.email,
+        password_hash: '$2a$12$N.9quT22aN7W2WqXJ.Uj5uv7O0xW1qJ9E8G2hG0qZ2n7X5eL9N7vC',
+        role: demoAccount.role,
         is_active: true,
       };
     }
@@ -48,7 +83,7 @@ export async function POST(req: NextRequest) {
     // Constant-time comparison to prevent user enumeration
     const dummyHash = '$2a$12$invalidhashfortimingprotection000000000000000000000000';
     const passwordToCheck = user?.password_hash ?? dummyHash;
-    const passwordMatch = (email === DEFAULT_ADMIN_EMAIL && password === DEFAULT_ADMIN_PASS) || (await bcrypt.compare(password, passwordToCheck));
+    const passwordMatch = (demoAccount && password === demoAccount.pass) || (await bcrypt.compare(password, passwordToCheck));
 
     if (!user || !passwordMatch || !user.is_active) {
       await writeAudit({
