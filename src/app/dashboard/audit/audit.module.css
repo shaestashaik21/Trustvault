@@ -1,0 +1,71 @@
+.page { max-width: 900px; }
+.header { margin-bottom: 1.5rem; }
+.header h1 { font-size: 1.5rem; font-weight: 700; color: #fff; margin: 0 0 0.3rem; }
+.sub { color: rgba(255,255,255,0.4); font-size: 0.88rem; margin: 0; }
+
+.filterBar { display: flex; flex-direction: column; gap: 0.75rem; margin-bottom: 1.5rem; }
+
+.search {
+  background: #111827; border: 1px solid rgba(255,255,255,0.1); border-radius: 8px;
+  padding: 0.65rem 1rem; color: #fff; font-size: 0.9rem; font-family: inherit;
+  outline: none; transition: border-color 0.2s; width: 100%;
+}
+.search:focus { border-color: #00d4aa; }
+.search::placeholder { color: rgba(255,255,255,0.25); }
+
+.filterChips { display: flex; gap: 0.4rem; flex-wrap: wrap; }
+
+.chip {
+  background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1);
+  color: rgba(255,255,255,0.5); border-radius: 100px; padding: 0.3rem 0.8rem;
+  font-size: 0.75rem; cursor: pointer; transition: all 0.15s; font-family: inherit;
+}
+.chip:hover { background: rgba(255,255,255,0.1); color: rgba(255,255,255,0.8); }
+.chipActive {
+  background: rgba(0,212,170,0.15); border-color: rgba(0,212,170,0.4);
+  color: #00d4aa; font-weight: 600;
+}
+
+/* TIMELINE */
+.timeline { display: flex; flex-direction: column; }
+
+.entry { display: flex; gap: 1rem; }
+
+.entryLeft {
+  display: flex; flex-direction: column; align-items: center; flex-shrink: 0; width: 16px;
+}
+.dot { width: 12px; height: 12px; border-radius: 50%; flex-shrink: 0; margin-top: 4px; }
+.line { flex: 1; width: 2px; background: rgba(255,255,255,0.07); margin: 4px 0; min-height: 20px; }
+
+.entryContent {
+  flex: 1; background: #111827; border: 1px solid rgba(255,255,255,0.07);
+  border-radius: 10px; padding: 0.85rem 1.1rem; margin-bottom: 0.6rem;
+}
+
+.entryHeader { display: flex; align-items: center; gap: 0.6rem; flex-wrap: wrap; margin-bottom: 0.5rem; }
+
+.action { font-size: 0.85rem; font-weight: 600; font-family: monospace; }
+
+.failBadge {
+  background: rgba(239,68,68,0.15); color: #f87171;
+  border-radius: 4px; padding: 0.1rem 0.45rem; font-size: 0.65rem; font-weight: 700;
+}
+
+.timestamp { font-size: 0.75rem; color: rgba(255,255,255,0.3); margin-left: auto; }
+
+.entryMeta { display: flex; gap: 1rem; flex-wrap: wrap; }
+.actor, .resource, .ip { font-size: 0.78rem; color: rgba(255,255,255,0.45); }
+
+.failReason { font-size: 0.78rem; color: #f87171; margin-top: 0.4rem; }
+
+.empty { text-align: center; padding: 3rem; color: rgba(255,255,255,0.3); font-size: 0.9rem; }
+
+.pagination {
+  display: flex; align-items: center; justify-content: center; gap: 1rem; margin-top: 1.5rem;
+}
+.pageBtn {
+  background: #111827; border: 1px solid rgba(255,255,255,0.1); color: rgba(255,255,255,0.6);
+  border-radius: 7px; padding: 0.5rem 1rem; font-size: 0.85rem; cursor: pointer; font-family: inherit;
+}
+.pageBtn:disabled { opacity: 0.4; cursor: not-allowed; }
+.pageInfo { font-size: 0.82rem; color: rgba(255,255,255,0.35); }

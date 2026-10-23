@@ -1,0 +1,73 @@
+.page { max-width: 1000px; }
+.header { display: flex; align-items: flex-start; justify-content: space-between; margin-bottom: 1.75rem; flex-wrap: wrap; gap: 1rem; }
+.header h1 { font-size: 1.5rem; font-weight: 700; color: #fff; margin: 0 0 0.3rem; }
+.sub { color: rgba(255,255,255,0.4); font-size: 0.88rem; margin: 0; }
+
+.createBtn {
+  background: linear-gradient(135deg, #00d4aa, #0057ff); color: #fff; border: none;
+  border-radius: 8px; padding: 0.65rem 1.2rem; font-size: 0.88rem; font-weight: 600;
+  cursor: pointer; font-family: inherit; transition: opacity 0.2s;
+}
+.createBtn:hover { opacity: 0.88; }
+
+.card { background: #111827; border: 1px solid rgba(255,255,255,0.07); border-radius: 12px; padding: 1.5rem; }
+.cardTitle { font-size: 0.95rem; font-weight: 600; color: #fff; margin: 0 0 1.25rem; }
+
+.table { width: 100%; border-collapse: collapse; }
+.table th {
+  text-align: left; padding: 0.65rem 1rem; font-size: 0.72rem; font-weight: 600;
+  color: rgba(255,255,255,0.35); text-transform: uppercase; letter-spacing: 0.06em;
+  border-bottom: 1px solid rgba(255,255,255,0.07);
+}
+.row:hover { background: rgba(255,255,255,0.025); }
+.row td { padding: 0.85rem 1rem; border-bottom: 1px solid rgba(255,255,255,0.04); vertical-align: middle; }
+.row:last-child td { border-bottom: none; }
+
+.emailCell { display: flex; align-items: center; gap: 0.6rem; font-size: 0.88rem; color: rgba(255,255,255,0.8); }
+.avatar {
+  width: 28px; height: 28px; border-radius: 50%;
+  background: linear-gradient(135deg, #00d4aa, #0057ff);
+  color: #fff; font-size: 0.72rem; font-weight: 700;
+  display: flex; align-items: center; justify-content: center; flex-shrink: 0;
+}
+
+.adminBadge { background: rgba(168,85,247,0.15); color: #a855f7; border-radius: 5px; padding: 0.2rem 0.55rem; font-size: 0.72rem; font-weight: 700; }
+.userBadge { background: rgba(255,255,255,0.07); color: rgba(255,255,255,0.5); border-radius: 5px; padding: 0.2rem 0.55rem; font-size: 0.72rem; font-weight: 600; }
+.activeBadge { color: #00d4aa; font-size: 0.8rem; font-weight: 600; }
+.inactiveBadge { color: #ef4444; font-size: 0.8rem; font-weight: 600; }
+.meta { font-size: 0.8rem; color: rgba(255,255,255,0.35); }
+
+.actions { display: flex; gap: 0.4rem; flex-wrap: wrap; }
+.actionBtn {
+  background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.1);
+  color: rgba(255,255,255,0.65); border-radius: 6px; padding: 0.3rem 0.65rem;
+  font-size: 0.75rem; cursor: pointer; transition: background 0.15s; font-family: inherit;
+}
+.actionBtn:hover { background: rgba(255,255,255,0.12); }
+.empty { text-align: center; padding: 2rem; color: rgba(255,255,255,0.3); font-size: 0.9rem; }
+
+/* MODAL */
+.overlay { position: fixed; inset: 0; background: rgba(0,0,0,0.7); display: flex; align-items: center; justify-content: center; z-index: 100; }
+.modal { background: #111827; border: 1px solid rgba(255,255,255,0.1); border-radius: 16px; padding: 1.75rem; width: 100%; max-width: 420px; }
+.modalHeader { display: flex; align-items: center; justify-content: space-between; margin-bottom: 1.5rem; }
+.modalHeader h2 { font-size: 1.1rem; font-weight: 700; color: #fff; margin: 0; }
+.closeBtn { background: none; border: none; color: rgba(255,255,255,0.4); font-size: 1.1rem; cursor: pointer; }
+
+.field { display: flex; flex-direction: column; gap: 0.35rem; margin-bottom: 1rem; }
+.field label { font-size: 0.75rem; color: rgba(255,255,255,0.5); font-weight: 500; text-transform: uppercase; letter-spacing: 0.05em; }
+.field input, .field select {
+  background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1);
+  border-radius: 8px; padding: 0.7rem 0.9rem; color: #fff; font-size: 0.9rem;
+  font-family: inherit; outline: none; transition: border-color 0.2s;
+}
+.field input:focus, .field select:focus { border-color: #00d4aa; }
+.field input::placeholder { color: rgba(255,255,255,0.2); }
+.field select option { background: #1f2937; }
+
+.errMsg { color: #f87171; font-size: 0.82rem; margin-bottom: 0.75rem; }
+.submitBtn {
+  width: 100%; background: linear-gradient(135deg, #00d4aa, #0057ff);
+  color: #fff; border: none; border-radius: 8px; padding: 0.8rem;
+  font-size: 0.95rem; font-weight: 600; cursor: pointer; font-family: inherit;
+}
+.submitBtn:disabled { opacity: 0.6; cursor: not-allowed; }

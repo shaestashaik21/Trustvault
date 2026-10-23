@@ -1,0 +1,68 @@
+.page { max-width: 900px; }
+.header { margin-bottom: 1.75rem; }
+.header h1 { font-size: 1.5rem; font-weight: 700; color: #fff; margin: 0 0 0.3rem; }
+.sub { color: rgba(255,255,255,0.4); font-size: 0.88rem; margin: 0; }
+
+.noDoc {
+  background: #111827; border: 1px solid rgba(255,255,255,0.07); border-radius: 12px;
+  padding: 2.5rem; text-align: center; color: rgba(255,255,255,0.4);
+}
+.noDoc a { color: #00d4aa; text-decoration: none; }
+
+.card {
+  background: #111827; border: 1px solid rgba(255,255,255,0.07);
+  border-radius: 12px; padding: 1.5rem; margin-bottom: 1.25rem;
+}
+.cardTitle { font-size: 0.95rem; font-weight: 600; color: #fff; margin: 0 0 1.25rem; }
+
+.grantForm { display: flex; gap: 0.75rem; flex-wrap: wrap; }
+
+.select {
+  background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1);
+  border-radius: 8px; padding: 0.65rem 0.9rem; color: #fff; font-size: 0.88rem;
+  font-family: inherit; outline: none; cursor: pointer; min-width: 200px;
+}
+.select option { background: #1f2937; }
+.select:focus { border-color: #00d4aa; }
+
+.grantBtn {
+  background: linear-gradient(135deg, #00d4aa, #0057ff); color: #fff; border: none;
+  border-radius: 8px; padding: 0.65rem 1.2rem; font-size: 0.88rem; font-weight: 600;
+  cursor: pointer; font-family: inherit; white-space: nowrap;
+}
+.grantBtn:disabled { opacity: 0.6; cursor: not-allowed; }
+
+.errMsg { color: #f87171; font-size: 0.82rem; margin-top: 0.5rem; }
+
+.table { width: 100%; border-collapse: collapse; }
+.table th {
+  text-align: left; padding: 0.65rem 1rem; font-size: 0.72rem; font-weight: 600;
+  color: rgba(255,255,255,0.35); text-transform: uppercase; letter-spacing: 0.06em;
+  border-bottom: 1px solid rgba(255,255,255,0.07);
+}
+.table td { padding: 0.85rem 1rem; border-bottom: 1px solid rgba(255,255,255,0.04); vertical-align: middle; }
+.table tr:last-child td { border-bottom: none; }
+
+.emailCell { display: flex; align-items: center; gap: 0.6rem; font-size: 0.88rem; color: rgba(255,255,255,0.8); }
+
+.avatar {
+  width: 28px; height: 28px; border-radius: 50%;
+  background: linear-gradient(135deg, #00d4aa, #0057ff);
+  color: #fff; font-size: 0.72rem; font-weight: 700;
+  display: flex; align-items: center; justify-content: center; flex-shrink: 0;
+}
+
+.levelBadge {
+  border-radius: 5px; padding: 0.2rem 0.6rem; font-size: 0.75rem; font-weight: 700; text-transform: uppercase;
+}
+
+.meta { font-size: 0.8rem; color: rgba(255,255,255,0.35); }
+
+.revokeBtn {
+  background: rgba(239,68,68,0.1); border: 1px solid rgba(239,68,68,0.25);
+  color: #f87171; border-radius: 6px; padding: 0.3rem 0.7rem;
+  font-size: 0.78rem; cursor: pointer; font-family: inherit; transition: background 0.15s;
+}
+.revokeBtn:hover { background: rgba(239,68,68,0.2); }
+
+.empty { color: rgba(255,255,255,0.3); font-size: 0.88rem; padding: 1rem 0; }
