@@ -30,42 +30,61 @@ export async function POST(req: NextRequest) {
       console.warn('[LOGIN DB UNAVAILABLE, USING LOCAL FALLBACK]');
     }
 
-    // Pre-configured role accounts for demo & testing
-    const DEMO_USERS: Record<string, { id: string; email: string; pass: string; role: 'admin' | 'user'; title: string }> = {
+    // Pre-configured role accounts exactly as required by specification:
+    // John Doe       | Administrator  | Manage users, view security logs, manage system settings
+    // Sarah Wilson   | Document Owner | Upload documents, edit own documents, grant/revoke access
+    // Mike Chen      | Editor         | Read and edit documents shared with him
+    // Alex Brown     | Viewer         | Read and download documents shared with him
+    // Emily Davis    | Viewer         | Read documents shared with her
+    const DEMO_USERS: Record<string, { id: string; name: string; email: string; pass: string; role: 'admin' | 'user'; title: string }> = {
+      'john.doe@trustvault.local': {
+        id: '00000000-0000-0000-0000-000000000001',
+        name: 'John Doe',
+        email: 'john.doe@trustvault.local',
+        pass: 'Admin@123456',
+        role: 'admin',
+        title: 'Administrator',
+      },
+      'sarah.wilson@trustvault.local': {
+        id: '00000000-0000-0000-0000-000000000002',
+        name: 'Sarah Wilson',
+        email: 'sarah.wilson@trustvault.local',
+        pass: 'Sarah@123456',
+        role: 'user',
+        title: 'Document Owner',
+      },
+      'mike.chen@trustvault.local': {
+        id: '00000000-0000-0000-0000-000000000003',
+        name: 'Mike Chen',
+        email: 'mike.chen@trustvault.local',
+        pass: 'Mike@123456',
+        role: 'user',
+        title: 'Editor',
+      },
+      'alex.brown@trustvault.local': {
+        id: '00000000-0000-0000-0000-000000000004',
+        name: 'Alex Brown',
+        email: 'alex.brown@trustvault.local',
+        pass: 'Alex@123456',
+        role: 'user',
+        title: 'Viewer',
+      },
+      'emily.davis@trustvault.local': {
+        id: '00000000-0000-0000-0000-000000000005',
+        name: 'Emily Davis',
+        email: 'emily.davis@trustvault.local',
+        pass: 'Emily@123456',
+        role: 'user',
+        title: 'Viewer',
+      },
+      // Keep legacy alias for backward compatibility
       'admin@trustvault.local': {
         id: '00000000-0000-0000-0000-000000000001',
+        name: 'John Doe',
         email: 'admin@trustvault.local',
         pass: 'Admin@123456',
         role: 'admin',
-        title: 'System Administrator',
-      },
-      'manager@trustvault.local': {
-        id: '00000000-0000-0000-0000-000000000002',
-        email: 'manager@trustvault.local',
-        pass: 'Manager@123456',
-        role: 'admin',
-        title: 'Operations Manager',
-      },
-      'auditor@trustvault.local': {
-        id: '00000000-0000-0000-0000-000000000003',
-        email: 'auditor@trustvault.local',
-        pass: 'Auditor@123456',
-        role: 'user',
-        title: 'Compliance Auditor',
-      },
-      'editor@trustvault.local': {
-        id: '00000000-0000-0000-0000-000000000004',
-        email: 'editor@trustvault.local',
-        pass: 'Editor@123456',
-        role: 'user',
-        title: 'Senior Editor',
-      },
-      'viewer@trustvault.local': {
-        id: '00000000-0000-0000-0000-000000000005',
-        email: 'viewer@trustvault.local',
-        pass: 'Viewer@123456',
-        role: 'user',
-        title: 'Guest Viewer',
+        title: 'Administrator',
       },
     };
 
@@ -111,7 +130,13 @@ export async function POST(req: NextRequest) {
     });
 
     const res = NextResponse.json({
-      user: { id: user.id, email: user.email, role: user.role },
+      user: {
+        id: user.id,
+        email: user.email,
+        name: demoAccount?.name ?? user.email.split('@')[0],
+        title: demoAccount?.title ?? (user.role === 'admin' ? 'Administrator' : 'User'),
+        role: user.role,
+      },
       token,
     });
 

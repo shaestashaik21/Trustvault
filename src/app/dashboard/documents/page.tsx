@@ -41,6 +41,7 @@ function getFileIcon(type: string) {
 }
 
 export default function DocumentsPage() {
+  const [currentUser, setCurrentUser] = useState<any>(null);
   const [docs, setDocs] = useState<Document[]>([]);
   const [loading, setLoading] = useState(true);
   const [search, setSearch] = useState('');
@@ -49,6 +50,11 @@ export default function DocumentsPage() {
   const [uploading, setUploading] = useState(false);
   const [uploadError, setUploadError] = useState('');
   const [deleteId, setDeleteId] = useState<string | null>(null);
+
+  useEffect(() => {
+    const stored = localStorage.getItem('tv_user');
+    if (stored) setCurrentUser(JSON.parse(stored));
+  }, []);
 
   const authHeaders = useCallback(() => ({
     Authorization: `Bearer ${localStorage.getItem('tv_token')}`,
@@ -186,11 +192,21 @@ export default function DocumentsPage() {
                 <td className={styles.meta}>{timeAgo(doc.created_at)}</td>
                 <td className={styles.actions}>
                   <a href={doc.file_url} target="_blank" rel="noopener noreferrer"
-                    className={styles.actionBtn} id={`view-doc-${doc.id}`}>View</a>
-                  <a href={`/dashboard/permissions?doc=${doc.id}`}
-                    className={styles.actionBtn} id={`perm-doc-${doc.id}`}>Perms</a>
-                  <button onClick={() => setDeleteId(doc.id)}
-                    className={`${styles.actionBtn} ${styles.deleteBtn}`} id={`del-doc-${doc.id}`}>Del</button>
+                    className={styles.actionBtn} id={`view-doc-${doc.id}`}>
+                    {currentUser?.title === 'Viewer' && currentUser?.name === 'Alex Brown' ? 'Download' : 'View'}
+                  </a>
+
+                  {/* Sarah Wilson (Doc Owner), John Doe (Admin), or owner of doc can manage permissions */}
+                  {(currentUser?.role === 'admin' || currentUser?.title === 'Document Owner' || doc.owner_id === currentUser?.id) && (
+                    <a href={`/dashboard/permissions?doc=${doc.id}`}
+                      className={styles.actionBtn} id={`perm-doc-${doc.id}`}>Perms</a>
+                  )}
+
+                  {/* Only Admin or document owner can delete */}
+                  {(currentUser?.role === 'admin' || currentUser?.title === 'Document Owner' || doc.owner_id === currentUser?.id) && (
+                    <button onClick={() => setDeleteId(doc.id)}
+                      className={`${styles.actionBtn} ${styles.deleteBtn}`} id={`del-doc-${doc.id}`}>Del</button>
+                  )}
                 </td>
               </tr>
             ))}

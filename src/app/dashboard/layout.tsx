@@ -5,7 +5,13 @@ import { useRouter, usePathname } from 'next/navigation';
 import Link from 'next/link';
 import styles from './layout.module.css';
 
-interface User { id: string; email: string; role: string; }
+interface User {
+  id: string;
+  email: string;
+  name?: string;
+  title?: string;
+  role: string;
+}
 
 const navItems = [
   { href: '/dashboard', label: 'Home', icon: '⊞' },
@@ -69,10 +75,17 @@ export default function DashboardLayout({ children }: { children: React.ReactNod
 
         <div className={styles.sidebarFooter}>
           <div className={styles.userInfo}>
-            <div className={styles.avatar}>{user.email[0].toUpperCase()}</div>
+            <div className={styles.avatar}>{(user.name ?? user.email)[0].toUpperCase()}</div>
             <div className={styles.userDetails}>
-              <div className={styles.userEmail}>{user.email}</div>
-              <div className={styles.userRole}>{user.role}</div>
+              <div className={styles.userName} style={{ fontSize: '0.85rem', fontWeight: 600, color: '#fff' }}>
+                {user.name ?? user.email.split('@')[0]}
+              </div>
+              <div className={styles.userRole} style={{ color: user.role === 'admin' ? '#f87171' : '#00d4aa', fontWeight: 600 }}>
+                {user.title ?? user.role}
+              </div>
+              <div className={styles.userEmail} style={{ fontSize: '0.7rem', color: 'rgba(255,255,255,0.4)' }}>
+                {user.email}
+              </div>
             </div>
           </div>
           <button id="logout-btn" onClick={handleLogout} className={styles.logoutBtn}>
