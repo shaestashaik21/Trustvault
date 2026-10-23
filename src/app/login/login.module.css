@@ -1,14 +1,17 @@
 .container {
   display: flex;
   min-height: 100vh;
-  background: #ffffff;
+  background: transparent;
   font-family: 'Inter', sans-serif;
 }
 
-/* LEFT PANEL (Dark brand side from original reference) */
+/* LEFT PANEL (Dark brand side with subtle glassmorphic transparency) */
 .leftPanel {
   flex: 1;
-  background: linear-gradient(145deg, #070d1e 0%, #0c1938 50%, #061126 100%);
+  background: rgba(7, 13, 30, 0.45);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border-right: 1px solid rgba(255, 255, 255, 0.1);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -87,20 +90,26 @@
   flex-shrink: 0;
 }
 
-/* RIGHT PANEL (Crisp white background from reference) */
+/* RIGHT PANEL */
 .rightPanel {
   flex: 0 0 520px;
-  background: #ffffff;
+  background: rgba(11, 19, 37, 0.65);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 3rem 3.5rem;
+  padding: 3rem 3rem;
+  box-shadow: -10px 0 40px rgba(0, 0, 0, 0.4);
 }
 
 .formCard {
   width: 100%;
   max-width: 400px;
-  background: #ffffff;
+  background: rgba(255, 255, 255, 0.95);
+  border-radius: 16px;
+  padding: 2.25rem;
+  box-shadow: 0 20px 45px rgba(0, 0, 0, 0.35);
 }
 
 .formHeader {
