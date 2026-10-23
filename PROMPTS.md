@@ -123,4 +123,31 @@ async function requireAdmin(req: NextRequest) {
 
 ---
 
+## 2026-10-23 · Entry 6 — Next.js 15+ dynamic route `params` as Promise compilation failure
+
+**What I asked:**
+> "Build the project with `npm run build` to verify production readiness"
+
+**What the AI produced:**
+The route handlers for `[id]` dynamic segments (`src/app/api/documents/[id]/route.ts` and `src/app/api/admin/users/[id]/route.ts`) were generated using the standard Next.js 14 signature:
+```typescript
+export async function GET(req: NextRequest, { params }: { params: { id: string } }) {
+  const { id } = params;
+```
+
+**What was wrong:**
+Next.js 15 and 16 changed `params` in dynamic route handlers to be an asynchronous `Promise<{ id: string }>`. `npm run build` failed with a TypeScript type constraint error (`Type does not satisfy constraint`).
+
+**What I did instead:**
+Updated all dynamic route handlers across the codebase to type `params` as `Promise<{ id: string }>` and `await` it before extracting parameters:
+```typescript
+export async function GET(req: NextRequest, { params }: { params: Promise<{ id: string }> }) {
+  const { id } = await params;
+```
+This restored full type compliance and enabled a clean 0-error build.
+
+**Commit:** `234e7e5`
+
+---
+
 _Continue adding entries as you build. Aim for one entry per meaningful AI interaction._
