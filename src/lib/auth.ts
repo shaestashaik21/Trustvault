@@ -30,8 +30,13 @@ export function getTokenFromRequest(req: NextRequest): string | null {
   if (authHeader?.startsWith('Bearer ')) {
     return authHeader.slice(7);
   }
-  // Fall back to cookie
-  return req.cookies.get('trustvault_token')?.value ?? null;
+  // Check cookie (from req.cookies or header cookie string)
+  const cookieVal = req.cookies.get('trustvault_token')?.value;
+  if (cookieVal) return cookieVal;
+
+  const rawCookie = req.headers.get('cookie') || '';
+  const match = rawCookie.match(/trustvault_token=([^;]+)/);
+  return match ? decodeURIComponent(match[1]) : null;
 }
 
 export async function getUserFromRequest(req: NextRequest): Promise<JWTPayload | null> {
